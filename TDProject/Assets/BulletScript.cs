@@ -3,9 +3,16 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     private Transform target;
+    [Header ("Stats")]
     public float speed = 20f;
     public int damage = 10;
+    public float damageRadius = 0;
     private bool hit = false;
+    private bool exploded = false;
+
+    [Header("Effects/Sub-objects")]
+    public GameObject impactEffect;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Seek(Transform _target)
     {
@@ -22,6 +29,7 @@ public class BulletScript : MonoBehaviour
         if (target == null)
         {
             bulletRemove();
+            return;
         }
 
         Vector3 dir = target.position - transform.position;
@@ -31,11 +39,18 @@ public class BulletScript : MonoBehaviour
             HitTarget();
         }
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
+        transform.LookAt(target);
     }
 
     void bulletRemove()
     {
         transform.GetChild(1).gameObject.GetComponent<ParticleSystem>().Stop();
+        transform.GetChild(0).gameObject.SetActive(false);
+        if (!exploded)
+        {
+            Instantiate(impactEffect, transform.position, Quaternion.identity);
+            exploded = true;
+        }
         Destroy(gameObject, 0.5f);
     }
 
@@ -43,8 +58,33 @@ public class BulletScript : MonoBehaviour
     {
         if (!hit) { 
         Debug.Log("HIT!");
-        bulletRemove();
+            bulletRemove();
+            if (damageRadius > 0f)
+            {
+                Explode();
+            }
+            else
+            {
+                Damage(target);
+            }
         }
         hit = true;
+    }
+
+    void Damage(Transform enemy)
+    {
+        Destroy(enemy.gameObject);
+
+    }
+    void Explode()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, damageRadius);
+        foreach (Collider collider in colliders)
+        {
+            if (collider.CompareTag("enemy"))
+            {
+                Damage(collider.transform);
+            }
+        }
     }
 }
