@@ -1,3 +1,7 @@
 /TDProject/Library
 /TDProject/Temp/Burst
 /TDProject/Temp
+*.log
+/TDProject/Logs
+/TDProject/Logs
+/TDProject/Logs
