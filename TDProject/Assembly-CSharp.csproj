@@ -62,19 +62,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\BulletScript.cs" />
-    <Compile Include="Assets\LivesText.cs" />
     <Compile Include="Assets\Turret.cs" />
-    <Compile Include="Assets\MoneyUIThingy.cs" />
+    <Compile Include="Assets\BuildManager.cs" />
+    <Compile Include="Assets\Node.cs" />
     <Compile Include="Assets\enemySpawner.cs" />
-    <Compile Include="Assets\EnemyScript.cs" />
-    <Compile Include="Assets\NodeUI.cs" />
-    <Compile Include="Assets\TurretBlueprint.cs" />
-    <Compile Include="Assets\EnemyController.cs" />
+    <Compile Include="Assets\SelfDestroyer.cs" />
+    <Compile Include="Assets\ShopScript.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\enemyMove.cs" />
-    <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\Waypoints.cs" />
-    <Compile Include="Assets\PlayerStats.cs" />
+    <Compile Include="Assets\CamController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TerrainSampleAssets\ThirdPartyNotices.txt" />
@@ -1250,6 +1247,10 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.AI.Navigation.Editor.ConversionSystem">
